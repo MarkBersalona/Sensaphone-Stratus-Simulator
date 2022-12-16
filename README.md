@@ -1,1 +1,1 @@
-"# Sensaphone-Stratus-Simulator" 
+This is the Sensaphone Stratus Simulator, used to simulate a Stratus EMS by transmitting the same JSON strings, to test a Stratus Display. Stratus Simulator runs on a Raspberry Pi with a 480x320 touchscreen.
