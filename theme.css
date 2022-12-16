@@ -1,0 +1,61 @@
+/* 
+    Created on : Aug 16, 2018, 10:44:12 AM
+    Author     : mbersalona
+
+    This is the CSS theme for the RMSP Simulator
+*/
+
+/*Main window*/
+window
+{
+    background-color: black;
+}
+
+/*Diagnostics pop-up dialog window*/
+dialog
+{
+    background-color: goldenrod;
+}
+
+
+/*Generic label*/
+label
+{
+    color: #33CCCC;
+    font: bold 24px DejaVu Sans, sans-serif;
+}
+
+/*Main display, connection OK/warning/error*/
+label#ConnectionOK
+{
+    color: #00FF00;
+}
+label#ConnectionWarning
+{
+    color: yellow;
+}
+label#ConnectionError
+{
+    color: #FF0000;
+}
+
+/*Main app title*/
+label#AppTitle
+{
+    font: 36px PibotoCondensed, sans-serif;
+    color: white;
+}
+
+/*Main display, titles*/
+label#MainTitle
+{
+    color: grey;
+}
+
+
+/*vertical separator*/
+separator
+{
+    color: gray;
+    background-color: gray;
+}
