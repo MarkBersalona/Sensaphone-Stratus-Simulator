@@ -22,7 +22,7 @@ dialog
 label
 {
     color: #33CCCC;
-    font: bold 24px DejaVu Sans, sans-serif;
+    font: bold 24px Piboto, Nimbus Sans Narrow, Liberation Sans, DejaVu Sans, sans-serif;
 }
 
 /*Main display, connection OK/warning/error*/
@@ -42,7 +42,7 @@ label#ConnectionError
 /*Main app title*/
 label#AppTitle
 {
-    font: 36px PibotoCondensed, sans-serif;
+    font: 36px PibotoCondensed, Nimbus Sans Narrow, Liberation Sans Narrow, sans-serif;
     color: white;
 }
 
