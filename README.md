@@ -10,7 +10,7 @@ Although intended for a SBC with a touchscreen display, Stratus Simulator can al
    - sudo apt-get install libjson-glib-dev
 2. Clone Sensaphone-Stratus-Simulator. If you're reading this, you're already likely in my GitHub project for Sensaphone-Stratus-Simulator, but if you're not it's at https://github.com/MarkBersalona/Sensaphone-Stratus-Simulator.git
 3. In a terminal move to the directory in which the repository has been cloned. Example: on my Linux laptop I cloned it to /home/mark/GTKProjects/Sensaphone-Stratus-Simulator
-4. From the terminal use the following command: `make build`
+4. From the terminal use the following command: `make`
 5. If all goes well, the application 'rmsp_simulator' will be in ../dist/Debug/GNU-Linux
 6. Move or copy 'rmsp_simulator' back up to the Sensaphone-Stratus-Simulator directory, the one with RMSPSimulator.glade, theme.css and all the .png images.
    - Will need 2 USB-to-serial cables and a null modem to connect the 2 serial ends
