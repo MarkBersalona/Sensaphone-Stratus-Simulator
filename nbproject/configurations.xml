@@ -48,10 +48,10 @@
       <compileType>
         <cTool>
           <standard>3</standard>
-          <commandLine>`pkg-config --cflags gtk+-3.0 json-glib-1.0` </commandLine>
+          <commandLine>`pkg-config --cflags gtk+-3.0` </commandLine>
         </cTool>
         <linkerTool>
-          <commandLine>`pkg-config --libs gtk+-3.0 json-glib-1.0`</commandLine>
+          <commandLine>`pkg-config --libs gtk+-3.0`</commandLine>
         </linkerTool>
       </compileType>
       <item path="E:/Bersalona/Rack Mounted Display/Projects/RMSP_Simulator/RMSPSimulator.glade"

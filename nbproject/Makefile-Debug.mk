@@ -41,7 +41,7 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=`pkg-config --cflags gtk+-3.0 json-glib-1.0`  
+CFLAGS=`pkg-config --cflags gtk+-3.0`  
 
 # CC Compiler Flags
 CCFLAGS=
@@ -62,7 +62,7 @@ LDLIBSOPTIONS=
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/rmsp_simulator: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/rmsp_simulator ${OBJECTFILES} ${LDLIBSOPTIONS} `pkg-config --libs gtk+-3.0 json-glib-1.0`
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/rmsp_simulator ${OBJECTFILES} ${LDLIBSOPTIONS} `pkg-config --libs gtk+-3.0`
 
 ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}
