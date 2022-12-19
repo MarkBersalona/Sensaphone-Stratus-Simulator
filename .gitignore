@@ -1,0 +1,8 @@
+
+*.o
+
+build/Debug/GNU-Linux/
+
+dist/Debug/GNU-Linux/rmsp_simulator
+
+rmsp_simulator
