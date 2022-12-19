@@ -42,7 +42,7 @@
 // Main display
 GtkCssProvider *cssProvider;
 GtkWindow *window;
-GtkWidget *lblAppTitle;
+GtkWidget *lblAppTitle, *lblVersionTitle;
 GtkWidget *lblConnectTitle, *lblConnect;
 GtkWidget *lblStatusTitle, *lblStatus;
 GtkWidget *evntShutdown, *evntStop, *evntGo;
@@ -238,7 +238,7 @@ int main(int argc, char** argv)
     g_print("=================================<=>=================================\r\n");
     g_print("                            RMSP Simulator                    \r\n");
     g_print("                               v%s.%s.%s \r\n", VERSION_A,VERSION_B,VERSION_C);
-    g_print("                             2022.12.15                              \r\n");
+    g_print("                             2022.12.19                              \r\n");
     g_print("=================================<=>=================================\r\n");
 
     //
@@ -298,6 +298,7 @@ int main(int argc, char** argv)
     // Connect labels
     //
     lblAppTitle     = gtk_builder_get_object(builder, "lblAppTitle");
+    lblVersionTitle = gtk_builder_get_object(builder, "lblVersionTitle");
     lblConnectTitle = gtk_builder_get_object(builder, "lblConnectTitle");
     lblConnect      = gtk_builder_get_object(builder, "lblConnect");
     lblStatusTitle  = gtk_builder_get_object(builder, "lblStatusTitle");
@@ -312,6 +313,7 @@ int main(int argc, char** argv)
     // Initialize stylings
     //
     gtk_widget_set_name(lblAppTitle, "AppTitle");
+    gtk_widget_set_name(lblVersionTitle, "VersionTitle");
     gtk_widget_set_name(lblConnectTitle, "MainTitle");
     gtk_widget_set_name(lblStatusTitle,  "MainTitle");
     

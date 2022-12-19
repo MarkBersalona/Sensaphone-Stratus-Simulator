@@ -45,6 +45,11 @@ label#AppTitle
     font: 36px PibotoCondensed, Nimbus Sans Narrow, Liberation Sans Narrow, sans-serif;
     color: white;
 }
+label#VersionTitle
+{
+    font: 24px PibotoCondensed, Nimbus Sans Narrow, Liberation Sans Narrow, sans-serif;
+    color: grey;
+}
 
 /*Main display, titles*/
 label#MainTitle
