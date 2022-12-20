@@ -230,6 +230,7 @@ int main(int argc, char** argv)
 {
     GtkBuilder *builder;
     GError *error = NULL;
+    char lstrBuf[40];
 
     gtk_init(&argc, &argv);
     
@@ -303,6 +304,12 @@ int main(int argc, char** argv)
     lblConnect      = gtk_builder_get_object(builder, "lblConnect");
     lblStatusTitle  = gtk_builder_get_object(builder, "lblStatusTitle");
     lblStatus       = gtk_builder_get_object(builder, "lblStatus");
+
+    //
+    // Initialize variable labels
+    //
+    sprintf(lstrBuf, "v%s.%s.%s", VERSION_A,VERSION_B,VERSION_C);
+    gtk_label_set_text(GTK_LABEL(lblVersionTitle), lstrBuf);
 
     //
     // Disable window decoration
