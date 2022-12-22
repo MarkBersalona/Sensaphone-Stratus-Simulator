@@ -236,26 +236,32 @@ main_periodic(gpointer data)
         case 0:
             // Zone values
             write(fd, strJSONZoneValues,strlen(strJSONZoneValues) );
+            //g_print("Sending Zone values\r\n");
             break;
         case 1:
             // Alarm values
             write(fd, strJSONAlarmValues,strlen(strJSONAlarmValues) );
+            //g_print("Sending Alarm values\r\n");
             break;
         case 2:
             // Zone names
             write(fd, strJSONZoneNames,strlen(strJSONZoneNames) );
+            //g_print("Sending Zone names\r\n");
             break;
         case 3:
             // Zone types/units
             write(fd, strJSONZoneTypes,strlen(strJSONZoneTypes) );
+            //g_print("Sending Zone types and units\r\n");
             break;
         case 4:
             // Diagnostics
             write(fd, strJSONDiagnostics,strlen(strJSONDiagnostics) );
+            //g_print("Sending Diagnostics\r\n");
             break;
         case 5:
             // Connection error code
             write(fd, strConnectionErrorMsg,strlen(strConnectionErrorMsg) );
+            //g_print("Sending Connection error code\r\n");
             break;
         default:
             // Display post no longer pending

@@ -46,7 +46,7 @@ char strJSONZoneTypes[10000];
 char strJSONDiagnostics[200];
 char strConnectionErrorMsg[40];
 
-char lcTempString[40];
+char lcTempString[100];
 
 
 ////////////////////////////////////////////////////////////////////////////
