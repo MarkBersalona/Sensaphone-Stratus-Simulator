@@ -47,6 +47,11 @@ GtkWidget *lblConnectTitle, *lblConnect;
 GtkWidget *lblStatusTitle, *lblStatus;
 GtkWidget *evntShutdown, *evntStop, *evntGo;
 
+// Transmit Display POSTs
+gboolean isDisplayPostTransmissionPending = FALSE;
+guint8   ucIndexSendDisplayPost;
+
+
 ////////////////////////////////////////////////////////////////////////////
 // Name:         button_shutdown
 // Description:  Shutdown the application
@@ -112,7 +117,7 @@ main_periodic(gpointer data)
     ++lulCounter;
     
     //
-    // USB reconnect
+    // Try to reconnect USB if disconnected
     //
     if (isUSBConnectionOK)
     {
@@ -154,7 +159,7 @@ main_periodic(gpointer data)
     }
     
     //
-    // Display connection
+    // Display connection status (OK or disconnected)
     //
     if (isUSBConnectionOK)
     {
@@ -170,7 +175,7 @@ main_periodic(gpointer data)
     }
     
     //
-    // Display transmit
+    // Display transmit status (transmitting or stopped)
     //
     if (isTransmitEnabled)
     {
@@ -185,12 +190,13 @@ main_periodic(gpointer data)
         gtk_label_set_text(GTK_LABEL(lblStatus), "STOPPED");
     }
         
-    
+    //
+    // Randomly update zone values every 15 seconds
+    // and randomly generate alarms, then update
+    // the Zone Update and Alarm POSTs accordingly.
+    //
     if (lulCounter%15 == 0 && isTransmitEnabled)
     {
-
-        //////////////////////////////////////////////////
-        // TEST MAB 2018.09.12
         // Random walk the zone database
         zone_db_random_walk();
         // Reconstruct zone values JSON
@@ -199,18 +205,63 @@ main_periodic(gpointer data)
         zone_db_random_alarms();
         // Reconstruct alarm values JSON
         zone_db_build_alarm_values();
-        //////////////////////////////////////////////////
-
+    }
     
-        //
-        // Transmit JSON
-        //
-        write(fd, strJSONZoneValues,strlen(strJSONZoneValues) );
-        write(fd, strJSONAlarmValues,strlen(strJSONAlarmValues) );
-        write(fd, strJSONZoneNames,strlen(strJSONZoneNames) );
-        write(fd, strJSONZoneTypes,strlen(strJSONZoneTypes) );
-        write(fd, strJSONDiagnostics,strlen(strJSONDiagnostics) );
-        write(fd, strConnectionErrorMsg,strlen(strConnectionErrorMsg) );
+    //
+    // Since Stratus EMS transmits each JSON Display POST one at a time
+    // every 15 seconds, the simulator should do something similar.
+    //
+    // Stratus EMS starts sending every 15 seconds, on the 2nd second
+    // of each quarter minute of the RTC (e.g. on the 2, 17, 32 
+    // and 47 seconds of the minute).
+    //
+    // Cancel display post transmissions if transmit is disabled
+    //
+    if (!isTransmitEnabled)
+    {
+        // Cancel display post transmissions
+        isDisplayPostTransmissionPending = FALSE;
+        ucIndexSendDisplayPost = 0;
+    }
+    if (lulCounter%15 == 2 && !isDisplayPostTransmissionPending && isTransmitEnabled)
+    {
+        // Display post transmissions are pending
+        isDisplayPostTransmissionPending = TRUE;
+        ucIndexSendDisplayPost = 0;
+    }
+    if (isDisplayPostTransmissionPending)
+    {
+        switch (ucIndexSendDisplayPost++)
+        {
+        case 0:
+            // Zone values
+            write(fd, strJSONZoneValues,strlen(strJSONZoneValues) );
+            break;
+        case 1:
+            // Alarm values
+            write(fd, strJSONAlarmValues,strlen(strJSONAlarmValues) );
+            break;
+        case 2:
+            // Zone names
+            write(fd, strJSONZoneNames,strlen(strJSONZoneNames) );
+            break;
+        case 3:
+            // Zone types/units
+            write(fd, strJSONZoneTypes,strlen(strJSONZoneTypes) );
+            break;
+        case 4:
+            // Diagnostics
+            write(fd, strJSONDiagnostics,strlen(strJSONDiagnostics) );
+            break;
+        case 5:
+            // Connection error code
+            write(fd, strConnectionErrorMsg,strlen(strConnectionErrorMsg) );
+            break;
+        default:
+            // Display post no longer pending
+            isDisplayPostTransmissionPending = FALSE;
+            break;
+        }
     }
        
     
@@ -239,7 +290,7 @@ int main(int argc, char** argv)
     g_print("=================================<=>=================================\r\n");
     g_print("                            RMSP Simulator                    \r\n");
     g_print("                               v%s.%s.%s \r\n", VERSION_A,VERSION_B,VERSION_C);
-    g_print("                             2022.12.19                              \r\n");
+    g_print("                             2022.12.22                              \r\n");
     g_print("=================================<=>=================================\r\n");
 
     //
@@ -313,6 +364,7 @@ int main(int argc, char** argv)
 
     //
     // Disable window decoration
+    // (title bar, resize gadget, min/max/close buttons, etc.)
     //
     gtk_window_set_decorated(GTK_WINDOW(window), FALSE);
 
