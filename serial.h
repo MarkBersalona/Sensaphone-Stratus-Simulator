@@ -20,6 +20,7 @@ extern "C" {
 ///////////////////////////////////////////////////////////////////////////////
 extern gboolean isUSBConnectionOK;
 extern gboolean isTransmitEnabled;
+extern gboolean isFirstSerialFail;
 extern int fd;
 /* IO channel variable for file */
 extern GIOChannel *gIOPointer;

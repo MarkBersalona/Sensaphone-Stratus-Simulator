@@ -128,19 +128,25 @@ main_periodic(gpointer data)
         // Code when USB connection failed
         // Try to open the serial-to-USB port
 
-        g_print("\r\nlulCounter=%d   serial_open returns %d\r\n",
+        /*g_print("\r\nlulCounter=%d   serial_open returns %d\r\n",
                 lulCounter, 
-                fd = serial_open("/dev/ttyUSB0",115200));
+                fd = serial_open("/dev/ttyUSB0",115200));*/
         //g_print("  fd = %d\r\n", fd);
+        fd = serial_open("/dev/ttyUSB0",115200);
         if (fd<0)
         {
-            g_print("***ERROR*** problem opening ttyUSB0\r\n");
+            if (isFirstSerialFail)
+            {
+                isFirstSerialFail = FALSE;
+                g_print("***ERROR*** problem opening ttyUSB0\r\n");
+            }
             isUSBConnectionOK = FALSE;
         }
         else
         {
             g_print("ttyUSB0 opened successfully!\r\n");
             isUSBConnectionOK = TRUE;
+            isFirstSerialFail = TRUE;
             gIOPointer = g_io_channel_unix_new(fd);  // creates the correct reference for callback
             // Set encoding
             g_io_channel_set_encoding(gIOPointer, NULL, NULL);
@@ -296,7 +302,7 @@ int main(int argc, char** argv)
     g_print("=================================<=>=================================\r\n");
     g_print("                            RMSP Simulator                    \r\n");
     g_print("                               v%s.%s.%s \r\n", VERSION_A,VERSION_B,VERSION_C);
-    g_print("                             2022.12.22                              \r\n");
+    g_print("                             2023.01.04                              \r\n");
     g_print("=================================<=>=================================\r\n");
 
     //

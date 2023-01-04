@@ -27,6 +27,7 @@
 // serial-to-USB
 //
 gboolean isUSBConnectionOK = FALSE;
+gboolean isFirstSerialFail = TRUE;
 gboolean isTransmitEnabled = TRUE;
 int fd;
 /* IO channel variable for file */
